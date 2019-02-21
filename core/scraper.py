@@ -14,7 +14,7 @@ def get_politifact_articles():
 
     stories = soup.find_all('h3', class_="story__title")
     story_links = ['https://politifact.com' + story.find('a')['href'] for story in stories]
-    return story_links
+    return story_links[::-1]
 
 def scrape_politifact_article(story_url):
     resp = requests.get(story_url)
@@ -25,5 +25,5 @@ def scrape_politifact_article(story_url):
     return soup.find("div", "article__text").get_text()
 
 if __name__ == '__main__':
-    print(get_politifact_articles()[-1])
+    print(get_politifact_articles()[0])
     print(scrape_politifact_article('https://www.politifact.com/truth-o-meter/article/2019/feb/19/what-2019-oscar-movies-get-right-wrong/'))
