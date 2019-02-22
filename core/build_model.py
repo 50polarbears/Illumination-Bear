@@ -15,7 +15,6 @@ def scrape(testing = False):
 class Corpus(object):
     def __init__(self, testing = False):
         self.testing = testing
-        self.doc_urls = dict()
     def __iter__(self):
         for url, doc in scrape(self.testing):
             yield doc2vec.TaggedDocument(preprocess_string(doc),
@@ -23,6 +22,7 @@ class Corpus(object):
 
 def build_from_corpus(documents,*args,**kwargs):
     model = doc2vec.Doc2Vec(documents,*args,**kwargs)
+    model.delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
     return model
 
 def preprocess_new_document(doc):
