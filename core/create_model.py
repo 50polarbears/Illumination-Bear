@@ -35,12 +35,10 @@ def find_similar(doc, model, *args, **kwargs):
     return sims
 
 if __name__ == '__main__':
-    # corpus = Corpus(testing=True)
-    # model = build_from_corpus(corpus, vector_size=50, min_count=3, epochs=10)
+    corpus = Corpus(testing=True)
+    model = build_from_corpus(corpus, vector_size=50, min_count=3, epochs=10)
     fname = "d2v_model.model"
-    # model.save(fname)
-
-    model = doc2vec.Doc2Vec.load(fname)
+    model.save(fname)
 
     new_document = "The weather in Cincinnati is very cold. Therefore global warming cannot be real."
 
